@@ -1,0 +1,56 @@
+package c1_infracomp;
+
+public class Repartidor extends Thread{
+	private int id;
+	private Buzon buzon;
+
+	public Repartidor(int id, Despachador despachador)
+	{
+		this.id = id;
+		this.buzon = despachador.getBuzon();
+	}
+	
+	public void entregarProducto(Producto producto)
+	{
+		try 
+		{
+			sleep(10000);
+		} 
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	private boolean verificarTrabajo(Producto producto) 
+	{
+		if(producto.getEstado().equals("FIN TRABAJO"))
+		{
+			return false;
+		}
+		return true;
+	}
+	
+	public void run()
+	{
+		boolean trabajar = true;
+		while(trabajar)
+		{
+			Producto producto = buzon.sacarProducto();
+			trabajar = verificarTrabajo(producto);
+			if (trabajar)
+			{
+				producto.cambiarEstado("EN REPARTO");
+				producto.stamp();
+				entregarProducto(producto);
+				producto.cambiarEstado("ENTREGADO");
+				producto.stamp();
+				synchronized (producto) 
+				{
+					producto.notify();
+				}
+			}
+		}
+		System.out.println("Repartidor "+id+" terminó de trabajar");
+	}
+}
