@@ -24,6 +24,7 @@ public class Bodega {
 
 		almacenamiento.add(producto);
 		producto.cambiarEstado("EN BODEGA");
+		producto.setComment(": Almacenado en bodega");
 		producto.stamp();
 		this.notify();
 	}

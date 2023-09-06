@@ -12,6 +12,7 @@ public class Buzon {
 	public synchronized void ponerProducto(Producto producto) {
 		productos.add(producto);
 		producto.cambiarEstado("DESPACHADO");
+		producto.setComment(": El despachador ahora está libre");
 		producto.stamp();
 		notifyAll();
 		while (productos.size() == 1)

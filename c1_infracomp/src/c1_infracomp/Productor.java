@@ -1,18 +1,25 @@
 package c1_infracomp;
 
 public class Productor extends Thread {
+	private int id;
 	private int nProductosAProducir;
 	private int nProductosProducidos;
 	private Bodega bodega;
 
-	public Productor(int nProductosAProducir, Bodega bodega) {
+	public Productor(int id, int nProductosAProducir, Bodega bodega) {
+		this.id = id;
 		this.nProductosAProducir = nProductosAProducir;
 		this.nProductosProducidos = 0;
 		this.bodega = bodega;
 	}
 
 	public Producto producirProducto() {
-		return new Producto(PlantaProduccion.getNewId());
+		Producto producto = new Producto(PlantaProduccion.getNewId());
+		producto.cambiarEstado("PRODUCIDO");
+		producto.setComment(": Producido por productor " + id);
+		producto.stamp();
+
+		return producto;
 	}
 
 	public void run() {
@@ -25,12 +32,19 @@ public class Productor extends Thread {
 					synchronized (producto) {
 						// El repartidor se duerme sobre el producto
 						// hasta que este sea entregado.
+						System.out.println("	Productor " + id + " se duerme sobre producto " + producto.getId());
 						producto.wait();
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
+
+			// Si quedan productos por producir, el productor se despierta
+			if (nProductosProducidos < nProductosAProducir) {
+				System.out.println("	Productor " + id + " se despierta");
+			}
+
 		}
 	}
 

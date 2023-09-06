@@ -12,7 +12,7 @@ public class PlantaProduccion {
 	private static ArrayList<Productor> productores = new ArrayList<Productor>();
 	private static ArrayList<Repartidor> repartidores = new ArrayList<Repartidor>();
 
-	private static int idProducto = 0;
+	private static int idProducto = 1;
 
 	public static void main(String[] args) {
 
@@ -34,6 +34,9 @@ public class PlantaProduccion {
 			return;
 		}
 
+		// Inicia produccion
+		System.out.println("\n\n INICIANDO PRODUCCION \n\n");
+
 		// Crear bodega
 		Bodega bodega = new Bodega(tamanoBodega);
 
@@ -44,7 +47,7 @@ public class PlantaProduccion {
 		// Crear productores restantes
 		for (int n = 0; n < nProductores; n++) {
 			int nProductosCU = (n < residuo) ? division_entera + 1 : division_entera;
-			Productor productor = new Productor(nProductosCU, bodega);
+			Productor productor = new Productor(n + 1, nProductosCU, bodega);
 			productores.add(productor);
 		}
 
@@ -53,7 +56,7 @@ public class PlantaProduccion {
 
 		// Crear repartidores
 		for (int m = 0; m < nRepartidores; m++) {
-			Repartidor repartidor = new Repartidor(m, despachador);
+			Repartidor repartidor = new Repartidor(m + 1, despachador);
 			repartidores.add(repartidor);
 
 		}

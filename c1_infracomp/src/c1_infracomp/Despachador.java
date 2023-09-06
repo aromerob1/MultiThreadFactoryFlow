@@ -27,6 +27,7 @@ public class Despachador extends Thread {
 		while (repartidos < nProductos) {
 			Producto producto = bodega.retirarProducto();
 			producto.cambiarEstado("EN DESPACHO");
+			producto.setComment(": Despachado por despachador");
 			producto.stamp();
 			buzon.ponerProducto(producto);
 			repartidos++;

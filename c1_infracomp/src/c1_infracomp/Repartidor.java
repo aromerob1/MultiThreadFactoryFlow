@@ -32,15 +32,17 @@ public class Repartidor extends Thread {
 			trabajar = verificarTrabajo(producto);
 			if (trabajar) {
 				producto.cambiarEstado("EN REPARTO");
+				producto.setComment(": Repartidor " + id + " está entregando el producto");
 				producto.stamp();
 				entregarProducto(producto);
 				producto.cambiarEstado("ENTREGADO");
+				producto.setComment(": Repartidor " + id + " entregó el producto");
 				producto.stamp();
 				synchronized (producto) {
 					producto.notify();
 				}
 			}
 		}
-		System.out.println("Repartidor " + id + " terminó de trabajar");
+		System.out.println("	Repartidor " + id + " terminó de trabajar");
 	}
 }
