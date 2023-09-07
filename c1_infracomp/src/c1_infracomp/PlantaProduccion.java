@@ -35,7 +35,7 @@ public class PlantaProduccion {
 		}
 
 		// Inicia produccion
-		System.out.println("\n\n INICIANDO PRODUCCION \n\n");
+		System.out.println("\n\nINICIANDO PRODUCCIÓN\n\n");
 
 		// Crear bodega
 		Bodega bodega = new Bodega(tamanoBodega);
@@ -73,6 +73,7 @@ public class PlantaProduccion {
 		for (Repartidor repartidor : repartidores) {
 			repartidor.start();
 		}
+
 	}
 
 	public synchronized static int getNewId() {

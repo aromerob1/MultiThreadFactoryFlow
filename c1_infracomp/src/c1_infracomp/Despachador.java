@@ -35,6 +35,7 @@ public class Despachador extends Thread {
 		for (int r = 0; r < nRepartidores; r++) {
 			buzon.senalFinTrabajo();
 		}
+
 	}
 
 }

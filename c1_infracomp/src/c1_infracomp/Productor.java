@@ -14,7 +14,7 @@ public class Productor extends Thread {
 	}
 
 	public Producto producirProducto() {
-		Producto producto = new Producto(PlantaProduccion.getNewId());
+		Producto producto = new Producto(PlantaProduccion.getNewId(), id);
 		producto.cambiarEstado("PRODUCIDO");
 		producto.setComment(": Producido por productor " + id);
 		producto.stamp();
@@ -32,7 +32,6 @@ public class Productor extends Thread {
 					synchronized (producto) {
 						// El repartidor se duerme sobre el producto
 						// hasta que este sea entregado.
-						System.out.println("	Productor " + id + " se duerme sobre producto " + producto.getId());
 						producto.wait();
 					}
 				} catch (InterruptedException e) {

@@ -11,8 +11,8 @@ public class Buzon {
 
 	public synchronized void ponerProducto(Producto producto) {
 		productos.add(producto);
-		producto.cambiarEstado("DESPACHADO");
-		producto.setComment(": El despachador ahora está libre");
+		producto.cambiarEstado("ENTREGADO");
+		producto.setComment(": El despachador entregó el paquete y ahora está libre");
 		producto.stamp();
 		notifyAll();
 		while (productos.size() == 1)
@@ -38,7 +38,7 @@ public class Buzon {
 	}
 
 	public synchronized void senalFinTrabajo() {
-		Producto senalFinTrabajo = new Producto(-1);
+		Producto senalFinTrabajo = new Producto(-1, -1);
 		senalFinTrabajo.cambiarEstado("FIN TRABAJO");
 		productos.add(senalFinTrabajo);
 		this.notify();

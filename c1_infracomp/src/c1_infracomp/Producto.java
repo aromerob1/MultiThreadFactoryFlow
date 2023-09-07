@@ -1,17 +1,18 @@
 package c1_infracomp;
 
 public class Producto {
-	@SuppressWarnings("unused")
 	private int id;
 	private String estado;
 	private String log;
 	private String comment;
+	private int idProductor;
 
-	public Producto(int id) {
+	public Producto(int id, int idProductor) {
 		this.id = id;
 		this.estado = "";
 		this.log = "Producto " + id;
 		this.comment = "";
+		this.idProductor = idProductor;
 	}
 
 	public void cambiarEstado(String nuevoEstado) {
@@ -20,7 +21,8 @@ public class Producto {
 
 	public void stamp() {
 		this.log = this.log + " -> " + this.estado;
-		System.out.println(log + comment);
+		// Prints log in bold, and comment in normal font
+		System.out.println("\033[1m" + this.log + "\033[0m" + this.comment);
 	}
 
 	public void setComment(String comment) {
@@ -41,6 +43,10 @@ public class Producto {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getIdProductor() {
+		return idProductor;
 	}
 
 }

@@ -31,12 +31,12 @@ public class Repartidor extends Thread {
 			Producto producto = buzon.sacarProducto();
 			trabajar = verificarTrabajo(producto);
 			if (trabajar) {
-				producto.cambiarEstado("EN REPARTO");
-				producto.setComment(": Repartidor " + id + " está entregando el producto");
+				producto.cambiarEstado("REPARTIENDO");
+				producto.setComment(": Repartidor " + id + " está entregando el producto " + producto.getId());
 				producto.stamp();
 				entregarProducto(producto);
 				producto.cambiarEstado("ENTREGADO");
-				producto.setComment(": Repartidor " + id + " entregó el producto");
+				producto.setComment(": Repartidor " + id + " entregó el producto " + producto.getId());
 				producto.stamp();
 				synchronized (producto) {
 					producto.notify();
