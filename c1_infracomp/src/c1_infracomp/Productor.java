@@ -45,6 +45,8 @@ public class Productor extends Thread {
 			}
 
 		}
+
+		System.out.println("	Productor " + id + " terminó de trabajar");
 	}
 
 }

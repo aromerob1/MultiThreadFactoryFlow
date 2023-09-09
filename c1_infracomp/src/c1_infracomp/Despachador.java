@@ -27,7 +27,8 @@ public class Despachador extends Thread {
 		while (repartidos < nProductos) {
 			Producto producto = bodega.retirarProducto();
 			producto.cambiarEstado("EN DESPACHO");
-			producto.setComment(": Despachado por despachador");
+			producto.setComment(": Sacado de bodega, quedan " + bodega.getAlmacenamiento()
+					+ " productos en bodega");
 			producto.stamp();
 			buzon.ponerProducto(producto);
 			repartidos++;
@@ -38,6 +39,8 @@ public class Despachador extends Thread {
 		for (int r = 0; r < nRepartidores; r++) {
 			buzon.senalFinTrabajo();
 		}
+
+		System.out.println("	Despachador terminó de trabajar");
 
 	}
 

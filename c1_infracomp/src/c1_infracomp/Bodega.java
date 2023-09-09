@@ -24,7 +24,8 @@ public class Bodega {
 
 		almacenamiento.add(producto);
 		producto.cambiarEstado("EN BODEGA");
-		producto.setComment(": Almacenado por productor " + producto.getIdProductor());
+		producto.setComment(": Almacenado por productor " + producto.getIdProductor() + ", hay "
+				+ almacenamiento.size() + " productos en bodega");
 		producto.stamp();
 		System.out.println("	Productor " + producto.getIdProductor() + " se duerme hasta la entrega del producto "
 				+ producto.getId());
@@ -43,10 +44,15 @@ public class Bodega {
 				}
 			}
 		}
+
 	}
 
 	public boolean isEmpty() {
 		return almacenamiento.isEmpty();
+	}
+
+	public int getAlmacenamiento() {
+		return almacenamiento.size();
 	}
 
 }
