@@ -32,6 +32,9 @@ public class Despachador extends Thread {
 			buzon.ponerProducto(producto);
 			repartidos++;
 		}
+
+		System.out.println("	Despachador da señal de fin de trabajo, los repartidores libres pueden irse");
+
 		for (int r = 0; r < nRepartidores; r++) {
 			buzon.senalFinTrabajo();
 		}

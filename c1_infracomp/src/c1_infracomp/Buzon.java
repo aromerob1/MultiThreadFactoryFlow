@@ -41,7 +41,7 @@ public class Buzon {
 		Producto senalFinTrabajo = new Producto(-1, -1);
 		senalFinTrabajo.cambiarEstado("FIN TRABAJO");
 		productos.add(senalFinTrabajo);
-		this.notify();
+		notifyAll();
 		while (productos.size() == 1)
 			try {
 				this.wait();
