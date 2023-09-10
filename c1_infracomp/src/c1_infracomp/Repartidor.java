@@ -29,10 +29,6 @@ public class Repartidor extends Thread {
 		boolean trabajar = true;
 		while (trabajar) {
 			Producto producto = buzon.sacarProducto();
-			if (producto.getId() != -1) {
-				System.out.println("	Repartidor " + id + " sacó el producto " + producto.getId() + " del buzón");
-
-			}
 			trabajar = verificarTrabajo(producto);
 			if (trabajar) {
 				producto.cambiarEstado("REPARTIENDO");
@@ -47,6 +43,6 @@ public class Repartidor extends Thread {
 				}
 			}
 		}
-		System.out.println("	Repartidor " + id + " terminó de trabajar");
+		System.out.println("	\u2022 Repartidor " + id + " terminó de trabajar");
 	}
 }

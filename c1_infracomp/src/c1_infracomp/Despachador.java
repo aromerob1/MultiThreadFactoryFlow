@@ -26,21 +26,17 @@ public class Despachador extends Thread {
 	public void run() {
 		while (repartidos < nProductos) {
 			Producto producto = bodega.retirarProducto();
-			producto.cambiarEstado("EN DESPACHO");
-			producto.setComment(": Sacado de bodega, quedan " + bodega.getAlmacenamiento()
-					+ " productos en bodega");
-			producto.stamp();
 			buzon.ponerProducto(producto);
 			repartidos++;
 		}
 
-		System.out.println("	Despachador da señal de fin de trabajo, los repartidores libres pueden irse");
+		System.out.println("	\u2022 Despachador da señal de fin de trabajo, los repartidores libres pueden irse");
 
 		for (int r = 0; r < nRepartidores; r++) {
 			buzon.senalFinTrabajo();
 		}
 
-		System.out.println("	Despachador terminó de trabajar");
+		System.out.println("	\u2022 Despachador terminó de trabajar");
 
 	}
 
