@@ -41,10 +41,12 @@ public class Productor extends Thread {
 
 			// Si quedan productos por producir, el productor se despierta
 			if (nProductosProducidos < nProductosAProducir) {
-				System.out.println("	Productor " + id + " se despierta");
+				System.out.println("	\u2022 Productor " + id + " se despierta");
 			}
 
 		}
+
+		System.out.println("	\u2022 Productor " + id + " terminó de trabajar");
 	}
 
 }

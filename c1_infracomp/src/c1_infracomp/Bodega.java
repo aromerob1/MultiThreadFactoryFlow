@@ -15,7 +15,7 @@ public class Bodega {
 		while (almacenamiento.size() == tamano) {
 			try {
 				// El repartidor se duerme sobre la bodega
-				// Si esta está llena.
+				// Si esta llena, hasta que esta tenga espacio.
 				this.wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
@@ -24,10 +24,12 @@ public class Bodega {
 
 		almacenamiento.add(producto);
 		producto.cambiarEstado("EN BODEGA");
-		producto.setComment(": Almacenado por productor " + producto.getIdProductor());
+		producto.setComment(": Almacenado por productor " + producto.getIdProductor() + ", hay "
+				+ almacenamiento.size() + " productos en bodega");
 		producto.stamp();
-		System.out.println("	Productor " + producto.getIdProductor() + " se duerme hasta la entrega del producto "
-				+ producto.getId());
+		System.out.println(
+				"	\u2022 Productor " + producto.getIdProductor() + " se duerme hasta la entrega del producto "
+						+ producto.getId());
 
 		this.notify();
 
@@ -38,11 +40,16 @@ public class Bodega {
 			synchronized (this) {
 				if (!isEmpty()) {
 					Producto producto = almacenamiento.remove(0);
-					this.notify();
+					producto.cambiarEstado("EN DESPACHO");
+					producto.setComment(": Sacado de bodega por despachador, quedan " + almacenamiento.size()
+							+ " productos en bodega");
+					producto.stamp();
+					notify();
 					return producto;
 				}
 			}
 		}
+
 	}
 
 	public boolean isEmpty() {

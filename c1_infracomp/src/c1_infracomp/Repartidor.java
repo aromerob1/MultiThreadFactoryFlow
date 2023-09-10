@@ -43,6 +43,6 @@ public class Repartidor extends Thread {
 				}
 			}
 		}
-		System.out.println("	Repartidor " + id + " terminó de trabajar");
+		System.out.println("	\u2022 Repartidor " + id + " terminó de trabajar");
 	}
 }
